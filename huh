@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For You ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+
+            background:
+                radial-gradient(circle at top left, #ffd6e7, transparent 35%),
+                radial-gradient(circle at bottom right, #ffc1d9, transparent 35%),
+                linear-gradient(135deg, #fff0f6, #ffd9e8);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+            color: #5a3042;
+        }
+
+        /* =========================
+           BACKGROUND SPARKLES
+        ========================= */
+
+        .sparkle {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            animation: sparkle 3s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .sparkle:nth-child(1) {
+            top: 12%;
+            left: 15%;
+        }
+
+        .sparkle:nth-child(2) {
+            top: 25%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .sparkle:nth-child(3) {
+            bottom: 20%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .sparkle:nth-child(4) {
+            bottom: 15%;
+            right: 12%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            width: min(90%, 650px);
+            max-height: 88vh;
+
+            padding: 45px 35px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+
+            box-shadow:
+                0 20px 60px rgba(180, 80, 120, 0.2);
+
+            position: relative;
+            z-index: 2;
+
+            animation: cardAppear 1s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* =========================
+           OPENING
+        ========================= */
+
+        .heart {
+            font-size: 65px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            margin: 15px 0 10px;
+
+            font-size: clamp(30px, 7vw, 48px);
+
+            color: #c94f78;
+
+            text-shadow:
+                0 3px 10px rgba(201, 79, 120, 0.15);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #704356;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .open-button {
+            border: none;
+            padding: 15px 28px;
+
+            border-radius: 50px;
+
+            background: linear-gradient(
+                135deg,
+                #e96b98,
+                #c94f78
+            );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(201, 79, 120, 0.3);
+
+            transition: 0.3s ease;
+        }
+
+        .open-button:hover {
+            transform: translateY(-3px) scale(1.03);
+
+            box-shadow:
+                0 15px 30px rgba(201, 79, 120, 0.4);
+        }
+
+        .open-button:active {
+            transform: scale(0.97);
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+            display: none;
+
+            text-align: left;
+
+            max-height: 75vh;
+            overflow-y: auto;
+
+            padding-right: 8px;
+        }
+
+        #message::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #message::-webkit-scrollbar-thumb {
+            background: #e9a0b9;
+            border-radius: 10px;
+        }
+
+        .birthday-title {
+            text-align: center;
+        }
+
+        .cake {
+            font-size: 55px;
+            text-align: center;
+
+            animation: cakeFloat 2s infinite ease-in-out;
+        }
+
+        @keyframes cakeFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .typing-container {
+            margin-top: 25px;
+
+            padding: 25px;
+
+            background: rgba(255, 255, 255, 0.5);
+
+            border-radius: 20px;
+
+            line-height: 1.9;
+
+            font-size: 16px;
+
+            white-space: pre-line;
+        }
+
+        .ending {
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .signature {
+            margin-top: 20px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            color: #c94f78;
+        }
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .floating-heart {
+            position: fixed;
+
+            bottom: -30px;
+
+            font-size: 20px;
+
+            pointer-events: none;
+
+            animation: floatHeart 6s linear forwards;
+
+            z-index: 1;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .card {
+                padding: 30px 20px;
+                border-radius: 25px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .typing-container {
+                padding: 20px;
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .heart {
+                font-size: 55px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sparkles -->
+    <div class="sparkle">✦</div>
+    <div class="sparkle">✧</div>
+    <div class="sparkle">✦</div>
+    <div class="sparkle">✧</div>
+
+
+    <!-- Background Music -->
+    <audio id="birthdaySong" loop>
+        <source src="Love-Piano.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- Main Card -->
+    <div class="card">
+
+        <!-- =========================
+             OPENING SCREEN
+        ========================== -->
+
+        <div id="opening">
+
+            <div class="heart">
+                ❤️
+            </div>
+
+            <h1>
+                Hey, you...
+            </h1>
+
+            <p class="subtitle">
+                Ada sesuatu buat kamu. 💌
+            </p>
+
+            <button
+                class="open-button"
+                onclick="openMessage()">
+
+                Open your surprise ✨
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             BIRTHDAY MESSAGE
+        ========================== -->
+
+        <div id="message">
+
+            <div class="cake">
+                🎂
+            </div>
+
+            <div class="birthday-title">
+
+                <h1>
+                    Happy Birthday!
+                </h1>
+
+                <p class="subtitle">
+                    Untuk seseorang yang spesial ❤️
+                </p>
+
+            </div>
+
+
+            <div class="typing-container">
+
+                <div id="typing"></div>
+
+            </div>
+
+
+            <div class="ending">
+
+                <p>
+                    Semoga hari ini menjadi salah satu
+                    hari yang paling indah buat kamu. ❤️
+                </p>
+
+                <p>
+                    Terima kasih sudah hadir dan menjadi
+                    bagian dari cerita hidupku.
+                </p>
+
+                <div class="signature">
+                    From someone who loves you ❤️
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           BIRTHDAY MESSAGE
+        ========================== */
+
+        const text = `Happy Birthday Bayiiii >-<
+
+Ga nyangka bayi aku umurnya udah 20 tahun HEHEHE.
+
+Selamat ulang tahun yaaa sayangg.
+Semoga kamu panjang umur, sehat selalu,
+dan rezekinya lancar.
+
+Aku bangga banget sama kamu karena walaupun
+kita ada berantem atau apa kamu masih mau
+untuk membahas masalah itu karena gamau
+hubungan kita hancur.
+
+Terimakasih banyak juga yaaa sayangg
+udah menjadi pasangan yang baik,
+yang mau ngertiin ayangnya terus
+walaupun ayangnya kadang tidak bisa
+ngertiin dia :p
+
+Kamu ga perlu takut kalau aku ada bosen
+ama kamu atau apa, karena aku ga akan
+pernah bosen ama kamu.
+
+Karena mana bisa aku bosen kalau ceweknya
+itu kayak kamu.
+
+Yang ada hidup aku penuh warna
+bukannya bosen >-< HEHEHE.
+
+BTW maaf yaaa kalau iniian aku kurang bagus
+atau apa, karena aku masih belajar lahh.
+
+Ini aja aku dibantu GPT, HEHEHE.
+
+Mungkin segitu aja kali hehehe.
+
+Sekali lagi selamat ulang tahun yaa sayanggg.
+
+Jangan tinggalkan ayangnya yang paling lucu,
+paling manis, paling ganteng ini okeyy? ❤️`;
+
+
+        /* =========================
+           OPEN MESSAGE
+        ========================== */
+
+        function openMessage() {
+
+            // Hide opening
+            document.getElementById("opening").style.display = "none";
+
+            // Show birthday message
+            document.getElementById("message").style.display = "block";
+
+
+            // Start music
+            const song =
+                document.getElementById("birthdaySong");
+
+            song.volume = 0.5;
+
+            song.play().catch(function(error) {
+
+                console.log(
+                    "Music could not start:",
+                    error
+                );
+
+            });
+
+
+            // Start typing
+            typeWriter();
+
+
+            // Start floating hearts
+            createHearts();
+
+        }
+
+
+        /* =========================
+           TYPEWRITER EFFECT
+        ========================== */
+
+        let index = 0;
+
+        function typeWriter() {
+
+            const typing =
+                document.getElementById("typing");
+
+            if (index < text.length) {
+
+                typing.textContent += text.charAt(index);
+
+                index++;
+
+                setTimeout(
+                    typeWriter,
+                    25
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================== */
+
+        function createHearts() {
+
+            setInterval(function() {
+
+                const heart =
+                    document.createElement("div");
+
+                heart.className =
+                    "floating-heart";
+
+                heart.innerHTML =
+                    Math.random() > 0.5
+                    ? "❤️"
+                    : "💕";
+
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+
+                heart.style.fontSize =
+                    (15 + Math.random() * 20) + "px";
+
+
+                heart.style.animationDuration =
+                    (4 + Math.random() * 4) + "s";
+
+
+                document.body.appendChild(heart);
+
+
+                setTimeout(function() {
+
+                    heart.remove();
+
+                }, 8000);
+
+            }, 700);
+
+        }
+
+    </script>
+
+</body>
+</html>
